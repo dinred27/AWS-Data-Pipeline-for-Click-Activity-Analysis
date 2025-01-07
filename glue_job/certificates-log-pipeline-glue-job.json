@@ -1,0 +1,220 @@
+{
+	"jobConfig": {
+		"name": "certificates-log-pipeline-glue-job",
+		"description": "",
+		"role": "arn:aws:iam::050451405701:role/Glue-certifications-log-pipeline-role",
+		"command": "glueetl",
+		"version": "5.0",
+		"runtime": null,
+		"workerType": "G.1X",
+		"numberOfWorkers": 10,
+		"maxCapacity": 10,
+		"jobRunQueuingEnabled": false,
+		"maxRetries": 0,
+		"timeout": 480,
+		"maxConcurrentRuns": 1,
+		"security": "none",
+		"scriptName": "certificates-log-pipeline-glue-job.py",
+		"scriptLocation": "s3://aws-glue-assets-050451405701-us-east-2/scripts/",
+		"language": "python-3",
+		"spark": true,
+		"sparkConfiguration": "standard",
+		"jobParameters": [],
+		"tags": [],
+		"jobMode": "VISUAL_MODE",
+		"createdOn": "2025-01-06T04:24:23.116Z",
+		"developerMode": false,
+		"connectionsList": [
+			"Jdbc connection"
+		],
+		"temporaryDirectory": "s3://aws-glue-assets-050451405701-us-east-2/temporary/",
+		"logging": true,
+		"glueHiveMetastore": true,
+		"etlAutoTuning": true,
+		"metrics": true,
+		"observabilityMetrics": true,
+		"bookmark": "job-bookmark-disable",
+		"sparkPath": "s3://aws-glue-assets-050451405701-us-east-2/sparkHistoryLogs/",
+		"flexExecution": false,
+		"minFlexWorkers": null,
+		"maintenanceWindow": null
+	},
+	"dag": {
+		"node-1736137056245": {
+			"nodeId": "node-1736137056245",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1736137047040"
+			],
+			"name": "Change Schema",
+			"generatedNodeName": "ChangeSchema_node1736137056245",
+			"classification": "Transform",
+			"type": "ApplyMapping",
+			"mapping": [
+				{
+					"toKey": "ip_address",
+					"fromPath": [
+						"ip_address"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "certificate",
+					"fromPath": [
+						"certificate"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "date",
+					"fromPath": [
+						"date"
+					],
+					"toType": "date",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "request",
+					"fromPath": [
+						"request"
+					],
+					"toType": "string",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				},
+				{
+					"toKey": "request_status",
+					"fromPath": [
+						"request_code"
+					],
+					"toType": "int",
+					"fromType": "string",
+					"dropped": false,
+					"children": null
+				}
+			],
+			"parentsValid": true,
+			"calculatedType": "",
+			"codeGenVersion": 2
+		},
+		"node-1736137058826": {
+			"nodeId": "node-1736137058826",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [
+				"node-1736137056245"
+			],
+			"name": "MySQL",
+			"generatedNodeName": "MySQL_node1736137058826",
+			"classification": "DataSink",
+			"type": "MySQL",
+			"streamingBatchInterval": 100,
+			"database": "logs-data-catalog",
+			"table": "logsdb_logs",
+			"format": null,
+			"partitionKeys": [],
+			"calculatedType": "",
+			"codeGenVersion": 2
+		},
+		"node-1736137047040": {
+			"nodeId": "node-1736137047040",
+			"dataPreview": false,
+			"previewAmount": 0,
+			"inputs": [],
+			"name": "Amazon S3",
+			"generatedNodeName": "AmazonS3_node1736137047040",
+			"classification": "DataSource",
+			"type": "S3",
+			"isCatalog": false,
+			"format": "csv",
+			"paths": [
+				"s3://certifications-dinesh-temp-logs"
+			],
+			"compressionType": null,
+			"exclusions": [],
+			"groupFiles": null,
+			"groupSize": null,
+			"recurse": true,
+			"maxBand": null,
+			"maxFilesInBand": null,
+			"additionalOptions": {
+				"boundedSize": null,
+				"boundedFiles": null,
+				"enableSamplePath": false,
+				"samplePath": "s3://certifications-dinesh-temp-logs/sample.csv",
+				"boundedOption": null
+			},
+			"separator": ",",
+			"escaper": "",
+			"quoteChar": "\"",
+			"multiline": null,
+			"withHeader": true,
+			"writeHeader": null,
+			"skipFirst": null,
+			"optimizePerformance": false,
+			"outputSchemas": [
+				[
+					{
+						"key": "ip_address",
+						"fullPath": [
+							"ip_address"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "certificate",
+						"fullPath": [
+							"certificate"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "date",
+						"fullPath": [
+							"date"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "request",
+						"fullPath": [
+							"request"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					},
+					{
+						"key": "request_code",
+						"fullPath": [
+							"request_code"
+						],
+						"type": "string",
+						"glueStudioType": null,
+						"children": null
+					}
+				]
+			],
+			"calculatedType": "",
+			"codeGenVersion": 2
+		}
+	},
+	"hasBeenSaved": false,
+	"usageProfileName": null
+}
