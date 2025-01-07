@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  CloudFormation template for EventBridge
+  Rulecertifications-log-pipeline-frequency
+Resources:
+  Rulebd86cee0:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: certifications-log-pipeline-frequency
+      ScheduleExpression: cron(0 8 ? * 2 *)
+      State: ENABLED
+      EventBusName: default
+      Targets:
+        - Id: Idd93f05f6-c111-4438-aca3-b63577316a06
+          Arn:
+            Fn::Sub: >-
+              arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:certifications-log-pipeline-lambda
+          Input: '{}'
+Parameters: {}
