@@ -42,6 +42,20 @@ This project is designed to track and analyze click activity on certification li
   - Most clicked certifications.
   - Engagement patterns over time.
   - Additional request-level details for in-depth analysis.
+- **QuickSight Integration**:
+  - Data is visualized using **AWS QuickSight**, offering interactive dashboards and charts to analyze:
+    - Certification popularity.
+    - Time-based click activity trends.
+    - Geographic insights (future enhancement based on IP geolocation).
+
+---
+
+## Notifications
+- **AWS SNS Notifications**:
+  - Configured to send alerts on the **success or failure** of the pipeline.  
+  - Notifications provide details about:
+    - Pipeline execution status.
+    - Any errors encountered during processing.
 
 ---
 
@@ -51,8 +65,12 @@ This project is designed to track and analyze click activity on certification li
 - **AWS DynamoDB:** For maintaining state between old and new data.
 - **AWS Glue:** For ETL and mapping data to the RDS table.
 - **AWS RDS (MySQL):** For structured data storage and querying.
+- **AWS QuickSight:** For visualizing data insights and trends.
+- **AWS SNS:** For sending pipeline execution notifications.
 - **Python:** For Lambda function and Glue scripting.
 - **SQL:** For querying and analyzing the transformed data.
+
+
 
 ---
 
