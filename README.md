@@ -1,4 +1,4 @@
-# AWS-Data-Pipeline-for-Click-Activity-Analysis
+# AWS-Data-Pipeline-to-Monitor-Reach-of-My-Resume
 
 This project is designed to track and analyze click activity on certification links embedded in my resume. By collecting and transforming raw click data, I gain insights into the reach and engagement of my resume, helping me assess the visibility of my profile in job market.
 
